@@ -1,5 +1,3 @@
-harsfshabsv bagfsgava bahssfssh bhagatagabha bhagtagavs bahgagsvs
-
 🚀 Major Project Repository
 
 Welcome to the Major Project repository! 🎯
