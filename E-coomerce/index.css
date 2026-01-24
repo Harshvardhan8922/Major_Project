@@ -17,7 +17,7 @@
 
 body {
     font-family: 'montserrat', sans-serif;
-    background: var(--coffee-cream);
+    background: linear-gradient(135deg,#0b0705 0%), #010000 50%;
     color: var(--text-dark);
     line-height: 1.7;
     overflow-x: hidden;
@@ -230,7 +230,7 @@ nav a:hover:after{
 
 .section-title {
     font-size: 42px;
-    color: var (--coffee-gold);
+    color: var(--coffee-gold);
     position: relative;
     display: inline-block;
 }
@@ -254,4 +254,85 @@ nav a:hover:after{
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 40px;
+}
+
+.product-card:hover {
+    background: var(--coffee-dark);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+    top: 0;
+}
+
+.product-card:hover{
+    transform: translateY(-15px);
+    border: 2px solid var(--coffee-gold);
+}
+
+.product-image {
+    height: 280px;
+    overflow: hidden;
+}
+
+.product-image image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:transform 0.5s ease;
+}
+.product-card:hover .product-image image {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 25px;
+    position: relative;
+}
+
+.product-tag {
+    position: absolute;
+    top: -20px;
+    right: 35px;
+    background: var(--coffee-gold);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.product-title {
+    color: var(--text-light);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-desc {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--coffee-gold);
+}
+.rating {
+    color: var(--coffee-gold);
+    font-size: 16px;
+}
+
+h1,h2,h3,h4 {
+    font-family: 'playfair display',serif;
+    font-weight: 700px;
+    letter-spacing: 0.5px;
 }
