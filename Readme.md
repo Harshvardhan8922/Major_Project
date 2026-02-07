@@ -1,7 +1,3 @@
-wjahshhs
-
-anshshshhaj
-nahahahaj
 #🚀 Major Project Repository
 
 Welcome to the Major Project repository! 🎯
