@@ -1,7 +1,3 @@
-ajjajajammanam
-
-ananakakkaam
-mamananamnaka
 #🚀 Major Project Repository
 
 Welcome to the Major Project repository! 🎯
