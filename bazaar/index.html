@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bazaar – Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>" />
+</head>
+<body>
+
+<div class="login-page">
+  <!-- Brand Panel -->
+  <div class="login-brand">
+    <div class="brand-logo">Bazaar<span>.</span></div>
+    <div class="brand-tagline">Your ultimate shopping destination</div>
+
+    <div class="brand-features">
+      <div class="brand-feature">
+        <div class="brand-feature-icon">🚀</div>
+        <div>Lightning fast delivery across India</div>
+      </div>
+      <div class="brand-feature">
+        <div class="brand-feature-icon">🔒</div>
+        <div>100% secure payments guaranteed</div>
+      </div>
+      <div class="brand-feature">
+        <div class="brand-feature-icon">↩️</div>
+        <div>Easy 30-day returns & exchanges</div>
+      </div>
+      <div class="brand-feature">
+        <div class="brand-feature-icon">💎</div>
+        <div>Premium quality products curated for you</div>
+      </div>
+    </div>
+
+    <div class="brand-products">
+      <div class="brand-product-card">
+        <div class="emoji">👗</div>
+        <p>Fashion</p>
+      </div>
+      <div class="brand-product-card">
+        <div class="emoji">📱</div>
+        <p>Electronics</p>
+      </div>
+      <div class="brand-product-card">
+        <div class="emoji">🏠</div>
+        <p>Home & Living</p>
+      </div>
+      <div class="brand-product-card">
+        <div class="emoji">💄</div>
+        <p>Beauty</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Panel -->
+  <div class="login-form-area">
+    <div class="login-form-wrap">
+      <div class="login-tabs">
+        <div class="login-tab active" onclick="switchTab('login')">Sign In</div>
+        <div class="login-tab" onclick="switchTab('register')">Create Account</div>
+      </div>
+
+      <!-- Login Form -->
+      <div id="login-form">
+        <h2 class="form-title">Welcome back! 👋</h2>
+        <p class="form-subtitle">Sign in to access your account and continue shopping</p>
+
+        <div class="form-group">
+          <label class="form-label">Email or Phone</label>
+          <div class="form-input-wrap">
+            <span class="form-input-icon">📧</span>
+            <input type="text" class="form-input" placeholder="Enter your email or phone" id="login-email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="form-input-wrap">
+            <span class="form-input-icon">🔒</span>
+            <input type="password" class="form-input" placeholder="Enter your password" id="login-password" />
+            <span class="form-input-toggle" onclick="togglePassword('login-password', this)">👁️</span>
+          </div>
+        </div>
+
+        <div class="forgot-link"><a href="#">Forgot password?</a></div>
+
+        <button class="btn-login" onclick="doLogin()">Sign In →</button>
+
+        <div class="divider">or continue with</div>
+
+        <div class="social-login">
+          <button class="btn-social" onclick="socialLogin('Google')">
+            <span>🔵</span> Google
+          </button>
+          <button class="btn-social" onclick="socialLogin('Facebook')">
+            <span>📘</span> Facebook
+          </button>
+        </div>
+
+        <div class="login-switch">
+          New to Bazaar? <a onclick="switchTab('register')">Create an account</a>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="register-form" style="display:none">
+        <h2 class="form-title">Join Bazaar! 🎉</h2>
+        <p class="form-subtitle">Create your account and start shopping in seconds</p>
+
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <div class="form-input-wrap">
+            <span class="form-input-icon">👤</span>
+            <input type="text" class="form-input" placeholder="Enter your full name" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="form-input-wrap">
+            <span class="form-input-icon">📧</span>
+            <input type="email" class="form-input" placeholder="Enter your email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="form-input-wrap">
+            <span class="form-input-icon">📱</span>
+            <input type="tel" class="form-input" placeholder="+91 Enter your phone number" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="form-input-wrap">
+            <span class="form-input-icon">🔒</span>
+            <input type="password" class="form-input" placeholder="Create a strong password" id="reg-password" />
+            <span class="form-input-toggle" onclick="togglePassword('reg-password', this)">👁️</span>
+          </div>
+        </div>
+
+        <button class="btn-login" onclick="doRegister()">Create Account →</button>
+
+        <div class="divider">or sign up with</div>
+
+        <div class="social-login">
+          <button class="btn-social" onclick="socialLogin('Google')">
+            <span>🔵</span> Google
+          </button>
+          <button class="btn-social" onclick="socialLogin('Facebook')">
+            <span>📘</span> Facebook
+          </button>
+        </div>
+
+        <div class="login-switch">
+          Already have an account? <a onclick="switchTab('login')">Sign in</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+    const tabs = document.querySelectorAll('.login-tab');
+    if (tab === 'login') {
+      tabs[0].classList.add('active');
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('register-form').style.display = 'none';
+    } else {
+      tabs[1].classList.add('active');
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('register-form').style.display = 'block';
+    }
+  }
+
+  function togglePassword(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁️'; }
+  }
+
+  function doLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const pass = document.getElementById('login-password').value.trim();
+    if (!email || !pass) {
+      shakeForm();
+      return;
+    }
+    localStorage.setItem('bazaar_user', JSON.stringify({ name: 'Rahul Sharma', email }));
+    window.location.href = 'home.html';
+  }
+
+  function doRegister() {
+    localStorage.setItem('bazaar_user', JSON.stringify({ name: 'New User', email: 'user@bazaar.com' }));
+    window.location.href = 'home.html';
+  }
+
+  function socialLogin(provider) {
+    localStorage.setItem('bazaar_user', JSON.stringify({ name: 'Rahul Sharma', email: 'rahul@gmail.com' }));
+    window.location.href = 'home.html';
+  }
+
+  function shakeForm() {
+    const wrap = document.querySelector('.login-form-wrap');
+    wrap.style.animation = 'shake 0.5s ease';
+    setTimeout(() => wrap.style.animation = '', 500);
+  }
+
+  // Add shake animation
+  const style = document.createElement('style');
+  style.textContent = `@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }`;
+  document.head.appendChild(style);
+
+  // Redirect if already logged in
+  if (localStorage.getItem('bazaar_user')) {
+    // Uncomment to auto-redirect: window.location.href = 'home.html';
+  }
+</script>
+
+</body>
+</html>

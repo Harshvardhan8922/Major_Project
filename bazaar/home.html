@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bazaar – Shop Everything</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>" />
+</head>
+<body>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Notification Panel Overlay -->
+<div id="notif-overlay" style="position:fixed;inset:0;z-index:490;display:none;background:rgba(0,0,0,0.3);" onclick="closeNotif()"></div>
+
+<!-- Notification Panel -->
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-header">
+    <span class="notif-title">Notifications</span>
+    <button class="notif-close" onclick="closeNotif()">✕</button>
+  </div>
+  <div class="notif-list">
+    <div class="notif-item unread">
+      <span class="notif-icon">📦</span>
+      <div>
+        <div class="notif-text">Your order <b>#BZR78234</b> has been shipped and is on the way!</div>
+        <div class="notif-time">2 minutes ago</div>
+      </div>
+    </div>
+    <div class="notif-item unread">
+      <span class="notif-icon">🎉</span>
+      <div>
+        <div class="notif-text">Flash Sale starts now! Up to <b>70% off</b> on electronics</div>
+        <div class="notif-time">15 minutes ago</div>
+      </div>
+    </div>
+    <div class="notif-item unread">
+      <span class="notif-icon">💰</span>
+      <div>
+        <div class="notif-text">₹200 cashback credited to your Bazaar wallet</div>
+        <div class="notif-time">1 hour ago</div>
+      </div>
+    </div>
+    <div class="notif-item">
+      <span class="notif-icon">⭐</span>
+      <div>
+        <div class="notif-text">Rate your recent purchase: <b>Nike Air Max 270</b></div>
+        <div class="notif-time">Yesterday</div>
+      </div>
+    </div>
+    <div class="notif-item">
+      <span class="notif-icon">🏷️</span>
+      <div>
+        <div class="notif-text">Use code <b>BAZAAR20</b> for 20% off your next order</div>
+        <div class="notif-time">2 days ago</div>
+      </div>
+    </div>
+    <div class="notif-item">
+      <span class="notif-icon">✅</span>
+      <div>
+        <div class="notif-text">Order <b>#BZR78100</b> delivered successfully. Enjoy!</div>
+        <div class="notif-time">3 days ago</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <span style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#FF6B35;">Bazaar<span style="color:white;">.</span></span>
+    <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-body">
+    <div class="mobile-menu-item" onclick="navigateTo('home');closeMobileMenu()">🏠 Home</div>
+    <div class="mobile-menu-item" onclick="navigateTo('categories');closeMobileMenu()">📦 All Categories</div>
+    <div class="mobile-menu-item" onclick="navigateTo('search');closeMobileMenu()">🔍 Search</div>
+    <div class="mobile-menu-item" onclick="navigateTo('cart');closeMobileMenu()">🛒 My Cart</div>
+    <div class="mobile-menu-item" onclick="navigateTo('wishlist');closeMobileMenu()">❤️ Wishlist</div>
+    <div class="mobile-menu-item" onclick="navigateTo('account');closeMobileMenu()">👤 My Account</div>
+    <div style="padding:16px 24px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Categories</div>
+    <div class="mobile-menu-item" onclick="filterByCategory('Electronics')">📱 Electronics</div>
+    <div class="mobile-menu-item" onclick="filterByCategory('Fashion')">👗 Fashion</div>
+    <div class="mobile-menu-item" onclick="filterByCategory('Home')">🏠 Home & Living</div>
+    <div class="mobile-menu-item" onclick="filterByCategory('Beauty')">💄 Beauty</div>
+    <div class="mobile-menu-item" onclick="filterByCategory('Sports')">⚽ Sports</div>
+    <div class="mobile-menu-item" onclick="doLogout()" style="color:var(--danger);">🚪 Logout</div>
+  </div>
+</div>
+
+<!-- App Container -->
+<div class="app-container">
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>📍 Deliver to: <b>Gurugram - 122001</b></span>
+        <span class="topbar-sep">|</span>
+        <span>🎉 Sale ends in: <span id="topbar-countdown">--:--:--</span></span>
+      </div>
+      <div class="topbar-right">
+        <a href="#">Help</a>
+        <span class="topbar-sep">|</span>
+        <a href="#">Track Order</a>
+        <span class="topbar-sep">|</span>
+        <a href="#" onclick="navigateTo('account')">My Account</a>
+        <span class="topbar-sep">|</span>
+        <a href="#" onclick="doLogout()">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <div class="nav-logo" onclick="navigateTo('home')">Bazaar<span>.</span></div>
+
+      <div class="search-bar">
+        <div class="search-bar-inner">
+          <div class="search-category">
+            <select id="search-cat-select" onchange="updateSearchCat(this)">
+              <option>All</option>
+              <option>Electronics</option>
+              <option>Fashion</option>
+              <option>Home</option>
+              <option>Beauty</option>
+              <option>Sports</option>
+              <option>Books</option>
+              <option>Toys</option>
+              <option>Grocery</option>
+            </select>
+          </div>
+          <input type="text" class="search-input" placeholder="Search for products, brands and more..." id="main-search" oninput="showSuggestions(this.value)" onkeydown="if(event.key==='Enter')doSearch()" />
+          <button class="search-btn" onclick="doSearch()">🔍</button>
+        </div>
+        <div class="search-suggestions" id="search-suggestions"></div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-action" onclick="openNotif()" title="Notifications">
+          <span class="icon">🔔</span>
+          <span class="label">Alerts</span>
+          <span class="badge" id="notif-badge">3</span>
+        </button>
+        <button class="nav-action" onclick="navigateTo('wishlist')" title="Wishlist">
+          <span class="icon">❤️</span>
+          <span class="label">Wishlist</span>
+          <span class="badge" id="wish-badge" style="display:none">0</span>
+        </button>
+        <button class="nav-action" onclick="navigateTo('cart')" title="Cart">
+          <span class="icon">🛒</span>
+          <span class="label">Cart</span>
+          <span class="badge" id="cart-badge" style="display:none">0</span>
+        </button>
+        <button class="nav-action" onclick="navigateTo('account')" title="Account">
+          <span class="icon">👤</span>
+          <span class="label" id="nav-username">Account</span>
+        </button>
+        <button class="nav-action mobile-only" onclick="openMobileMenu()" style="display:none" id="hamburger">
+          <span class="icon">☰</span>
+          <span class="label">Menu</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Category Nav -->
+  <div class="cat-nav">
+    <div class="container cat-nav-inner">
+      <div class="cat-nav-item active" data-cat="all" onclick="setCatNav(this,'all')"><span class="cat-icon">🏠</span> Home</div>
+      <div class="cat-nav-item" data-cat="Electronics" onclick="setCatNav(this,'Electronics')"><span class="cat-icon">📱</span> Electronics</div>
+      <div class="cat-nav-item" data-cat="Fashion" onclick="setCatNav(this,'Fashion')"><span class="cat-icon">👗</span> Fashion</div>
+      <div class="cat-nav-item" data-cat="Home" onclick="setCatNav(this,'Home')"><span class="cat-icon">🏠</span> Home & Living</div>
+      <div class="cat-nav-item" data-cat="Beauty" onclick="setCatNav(this,'Beauty')"><span class="cat-icon">💄</span> Beauty</div>
+      <div class="cat-nav-item" data-cat="Sports" onclick="setCatNav(this,'Sports')"><span class="cat-icon">⚽</span> Sports</div>
+      <div class="cat-nav-item" data-cat="Books" onclick="setCatNav(this,'Books')"><span class="cat-icon">📚</span> Books</div>
+      <div class="cat-nav-item" data-cat="Toys" onclick="setCatNav(this,'Toys')"><span class="cat-icon">🧸</span> Toys</div>
+      <div class="cat-nav-item" data-cat="Grocery" onclick="setCatNav(this,'Grocery')"><span class="cat-icon">🛒</span> Grocery</div>
+      <div class="cat-nav-item" onclick="navigateTo('categories')"><span class="cat-icon">📦</span> All Categories</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main style="min-height:60vh;">
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+      <div class="container">
+
+        <!-- Hero Slider -->
+        <div class="hero" style="margin:24px 0 0;">
+          <div class="hero-slides" id="hero-slides">
+            <div class="hero-slide hero-slide-1">
+              <div class="hero-content">
+                <div class="hero-tag">⚡ Mega Sale</div>
+                <h1 class="hero-title">Next-Gen<br><span>Electronics</span><br>Are Here</h1>
+                <p class="hero-desc">Discover the latest smartphones, laptops & gadgets at unbeatable prices</p>
+                <div class="hero-actions">
+                  <button class="btn btn-primary" onclick="filterByCategory('Electronics')">Shop Electronics</button>
+                  <button class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.5);" onclick="navigateTo('categories')">View All</button>
+                </div>
+              </div>
+              <div class="hero-img">📱</div>
+            </div>
+            <div class="hero-slide hero-slide-2">
+              <div class="hero-content">
+                <div class="hero-tag">👗 New Arrivals</div>
+                <h1 class="hero-title">Fashion<br><span style="color:var(--secondary);">Forward</span><br>Collection</h1>
+                <p class="hero-desc">Curated styles for every occasion — from casual to couture</p>
+                <div class="hero-actions">
+                  <button class="btn btn-primary" style="background:var(--secondary);" onclick="filterByCategory('Fashion')">Explore Fashion</button>
+                  <button class="btn btn-outline" style="color:var(--secondary);border-color:var(--secondary);" onclick="navigateTo('categories')">View All</button>
+                </div>
+              </div>
+              <div class="hero-img">👗</div>
+            </div>
+            <div class="hero-slide hero-slide-3">
+              <div class="hero-content">
+                <div class="hero-tag">🏠 Home Decor</div>
+                <h1 class="hero-title">Transform<br><span>Your</span><br>Living Space</h1>
+                <p class="hero-desc">Premium furniture, décor & essentials for your dream home</p>
+                <div class="hero-actions">
+                  <button class="btn btn-primary" style="background:white;color:var(--secondary);" onclick="filterByCategory('Home')">Shop Now</button>
+                  <button class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.5);" onclick="navigateTo('categories')">View All</button>
+                </div>
+              </div>
+              <div class="hero-img">🛋️</div>
+            </div>
+          </div>
+          <button class="hero-arrow prev" onclick="slideHero(-1)">‹</button>
+          <button class="hero-arrow next" onclick="slideHero(1)">›</button>
+          <div class="hero-dots" id="hero-dots">
+            <div class="hero-dot active" onclick="goToSlide(0)"></div>
+            <div class="hero-dot" onclick="goToSlide(1)"></div>
+            <div class="hero-dot" onclick="goToSlide(2)"></div>
+          </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+          <div class="stat-item">
+            <div class="stat-icon">🚀</div>
+            <div>
+              <div class="stat-label">Free Delivery</div>
+              <div class="stat-value">On orders above ₹499</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">↩️</div>
+            <div>
+              <div class="stat-label">Easy Returns</div>
+              <div class="stat-value">30-day return policy</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">🔒</div>
+            <div>
+              <div class="stat-label">Secure Payment</div>
+              <div class="stat-value">100% safe & protected</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">🎧</div>
+            <div>
+              <div class="stat-label">24/7 Support</div>
+              <div class="stat-value">Always here to help</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Grid -->
+        <div class="category-section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Shop by Category</div>
+              <div class="section-subtitle">Explore our wide range of products</div>
+            </div>
+            <span class="view-all" onclick="navigateTo('categories')">View All →</span>
+          </div>
+          <div class="category-grid">
+            <div class="cat-card" onclick="filterByCategory('Electronics')">
+              <span class="emoji">📱</span>
+              <div class="name">Electronics</div>
+              <div class="count">1,200+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Fashion')">
+              <span class="emoji">👗</span>
+              <div class="name">Fashion</div>
+              <div class="count">3,400+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Home')">
+              <span class="emoji">🏠</span>
+              <div class="name">Home & Living</div>
+              <div class="count">890+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Beauty')">
+              <span class="emoji">💄</span>
+              <div class="name">Beauty</div>
+              <div class="count">650+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Sports')">
+              <span class="emoji">⚽</span>
+              <div class="name">Sports</div>
+              <div class="count">420+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Books')">
+              <span class="emoji">📚</span>
+              <div class="name">Books</div>
+              <div class="count">2,100+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Toys')">
+              <span class="emoji">🧸</span>
+              <div class="name">Toys & Games</div>
+              <div class="count">340+ items</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('Grocery')">
+              <span class="emoji">🛒</span>
+              <div class="name">Grocery</div>
+              <div class="count">1,800+ items</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flash Sale -->
+        <div class="flash-sale">
+          <div class="flash-sale-header">
+            <div class="flash-title">
+              <span class="fire">🔥</span> Flash Sale
+            </div>
+            <div class="countdown" id="countdown">
+              <div class="countdown-unit"><span class="num" id="cd-h">08</span><span class="lbl">Hrs</span></div>
+              <span class="countdown-sep">:</span>
+              <div class="countdown-unit"><span class="num" id="cd-m">45</span><span class="lbl">Min</span></div>
+              <span class="countdown-sep">:</span>
+              <div class="countdown-unit"><span class="num" id="cd-s">30</span><span class="lbl">Sec</span></div>
+            </div>
+          </div>
+          <div class="flash-products" id="flash-products"></div>
+        </div>
+
+        <!-- Banners -->
+        <div class="banners">
+          <div class="banner-card banner-card-1" onclick="filterByCategory('Electronics')">
+            <div class="banner-tag">Limited Time</div>
+            <div class="banner-title">Gadgets Up<br>to 60% Off</div>
+            <div class="banner-cta">Shop Now →</div>
+            <div class="banner-emoji">💻</div>
+          </div>
+          <div class="banner-card banner-card-2" onclick="filterByCategory('Fashion')">
+            <div class="banner-tag">New Collection</div>
+            <div class="banner-title">Trendy Styles<br>Just Arrived</div>
+            <div class="banner-cta">Explore →</div>
+            <div class="banner-emoji">👠</div>
+          </div>
+          <div class="banner-card banner-card-3" onclick="filterByCategory('Beauty')">
+            <div class="banner-tag">Beauty Sale</div>
+            <div class="banner-title">Skincare &<br>Makeup Deals</div>
+            <div class="banner-cta">Get Glowing →</div>
+            <div class="banner-emoji">💆</div>
+          </div>
+        </div>
+
+        <!-- Trending Now -->
+        <div class="products-section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">🔥 Trending Now</div>
+              <div class="section-subtitle">Most popular products this week</div>
+            </div>
+            <span class="view-all" onclick="navigateTo('search')">View All →</span>
+          </div>
+          <div class="products-grid" id="trending-products"></div>
+        </div>
+
+        <!-- Second Banner -->
+        <div style="background:linear-gradient(135deg,#1A1A2E,#16213E);border-radius:24px;padding:40px;margin:32px 0;display:flex;align-items:center;justify-content:space-between;overflow:hidden;position:relative;">
+          <div style="z-index:1;">
+            <div style="color:rgba(255,255,255,0.6);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Exclusive Deal</div>
+            <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:white;margin:8px 0;">Get ₹500 Off<br>Your First Order</div>
+            <div style="color:rgba(255,255,255,0.7);margin-bottom:20px;">Use code <b style="color:#FFD700">BAZAAR500</b> at checkout</div>
+            <button class="btn btn-primary" onclick="showToast('Code BAZAAR500 copied! 🎉','success')">Copy Code</button>
+          </div>
+          <div style="font-size:100px;opacity:0.15;position:absolute;right:40px;">🎁</div>
+          <div style="font-size:80px;z-index:1;">🎁</div>
+        </div>
+
+        <!-- More Products -->
+        <div class="products-section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">✨ Top Picks For You</div>
+              <div class="section-subtitle">Handpicked selections based on your preferences</div>
+            </div>
+            <span class="view-all" onclick="navigateTo('search')">View All →</span>
+          </div>
+          <div class="products-grid" id="recommended-products"></div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END HOME PAGE -->
+
+    <!-- CATEGORIES PAGE -->
+    <div class="page" id="page-categories">
+      <div class="container categories-page">
+        <div class="categories-hero">
+          <div>
+            <h1>All Categories</h1>
+            <p>Browse through thousands of products across all categories</p>
+          </div>
+          <div class="categories-hero-emoji">🛍️</div>
+        </div>
+        <div class="categories-grid">
+          <div class="category-big-card" onclick="filterByCategory('Electronics')">
+            <div class="cat-bg cat-bg-1">
+              <span class="cat-big-emoji">📱</span>
+              <span class="cat-big-name">Electronics</span>
+              <span class="cat-big-count">1,200+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Electronics →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Fashion')">
+            <div class="cat-bg cat-bg-2">
+              <span class="cat-big-emoji">👗</span>
+              <span class="cat-big-name">Fashion</span>
+              <span class="cat-big-count">3,400+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Fashion →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Home')">
+            <div class="cat-bg cat-bg-3">
+              <span class="cat-big-emoji">🏠</span>
+              <span class="cat-big-name">Home & Living</span>
+              <span class="cat-big-count">890+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Home →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Beauty')">
+            <div class="cat-bg cat-bg-4">
+              <span class="cat-big-emoji">💄</span>
+              <span class="cat-big-name">Beauty</span>
+              <span class="cat-big-count">650+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Beauty →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Sports')">
+            <div class="cat-bg cat-bg-5">
+              <span class="cat-big-emoji">⚽</span>
+              <span class="cat-big-name">Sports</span>
+              <span class="cat-big-count">420+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Sports →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Books')">
+            <div class="cat-bg cat-bg-6">
+              <span class="cat-big-emoji">📚</span>
+              <span class="cat-big-name">Books</span>
+              <span class="cat-big-count">2,100+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Books →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Toys')">
+            <div class="cat-bg cat-bg-7">
+              <span class="cat-big-emoji">🧸</span>
+              <span class="cat-big-name">Toys & Games</span>
+              <span class="cat-big-count">340+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Toys →</span></div>
+          </div>
+          <div class="category-big-card" onclick="filterByCategory('Grocery')">
+            <div class="cat-bg cat-bg-8">
+              <span class="cat-big-emoji">🛒</span>
+              <span class="cat-big-name">Grocery</span>
+              <span class="cat-big-count">1,800+ products</span>
+            </div>
+            <div class="cat-overlay"><span>Shop Grocery →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END CATEGORIES -->
+
+    <!-- SEARCH/PRODUCTS PAGE -->
+    <div class="page" id="page-search">
+      <div class="container search-page">
+        <div class="search-layout">
+          <div class="filter-panel">
+            <div class="filter-title">
+              Filters
+              <span class="filter-clear" onclick="clearFilters()">Clear All</span>
+            </div>
+            <div class="filter-group">
+              <div class="filter-group-title">Categories</div>
+              <div class="filter-option"><input type="checkbox" id="f-electronics"><label for="f-electronics">Electronics</label></div>
+              <div class="filter-option"><input type="checkbox" id="f-fashion"><label for="f-fashion">Fashion</label></div>
+              <div class="filter-option"><input type="checkbox" id="f-home"><label for="f-home">Home & Living</label></div>
+              <div class="filter-option"><input type="checkbox" id="f-beauty"><label for="f-beauty">Beauty</label></div>
+              <div class="filter-option"><input type="checkbox" id="f-sports"><label for="f-sports">Sports</label></div>
+            </div>
+            <div class="filter-group">
+              <div class="filter-group-title">Price Range</div>
+              <div class="price-range">
+                <input type="number" class="price-input" placeholder="Min ₹" id="price-min">
+                <input type="number" class="price-input" placeholder="Max ₹" id="price-max">
+              </div>
+            </div>
+            <div class="filter-group">
+              <div class="filter-group-title">Rating</div>
+              <div class="filter-option"><input type="radio" name="rating" id="r-4"><label for="r-4">⭐⭐⭐⭐ & above</label></div>
+              <div class="filter-option"><input type="radio" name="rating" id="r-3"><label for="r-3">⭐⭐⭐ & above</label></div>
+              <div class="filter-option"><input type="radio" name="rating" id="r-any"><label for="r-any">Any rating</label></div>
+            </div>
+            <div class="filter-group">
+              <div class="filter-group-title">Discount</div>
+              <div class="filter-option"><input type="checkbox" id="d-50"><label for="d-50">50% or more</label></div>
+              <div class="filter-option"><input type="checkbox" id="d-30"><label for="d-30">30% or more</label></div>
+              <div class="filter-option"><input type="checkbox" id="d-10"><label for="d-10">10% or more</label></div>
+            </div>
+            <div class="filter-group">
+              <div class="filter-group-title">Brand</div>
+              <div class="filter-option"><input type="checkbox" id="b-apple"><label for="b-apple">Apple</label></div>
+              <div class="filter-option"><input type="checkbox" id="b-samsung"><label for="b-samsung">Samsung</label></div>
+              <div class="filter-option"><input type="checkbox" id="b-nike"><label for="b-nike">Nike</label></div>
+              <div class="filter-option"><input type="checkbox" id="b-sony"><label for="b-sony">Sony</label></div>
+              <div class="filter-option"><input type="checkbox" id="b-lakme"><label for="b-lakme">Lakme</label></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-header">
+              <div class="results-count" id="results-count">Showing all products</div>
+              <select class="sort-select" id="sort-select" onchange="sortProducts()">
+                <option value="popular">Most Popular</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Top Rated</option>
+                <option value="newest">Newest First</option>
+                <option value="discount">Highest Discount</option>
+              </select>
+            </div>
+            <div class="products-grid" id="search-products"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END SEARCH -->
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div class="page" id="page-product">
+      <div class="container">
+        <div class="product-detail-layout" id="product-detail-content"></div>
+        <div class="products-section" style="margin-top:48px;">
+          <div class="section-header">
+            <div class="section-title">Similar Products</div>
+          </div>
+          <div class="products-grid" id="similar-products"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CART PAGE -->
+    <div class="page" id="page-cart">
+      <div class="container">
+        <div class="cart-layout">
+          <div id="cart-main">
+            <div class="cart-header">
+              <div class="cart-title">My Cart <span style="font-size:16px;color:var(--text-muted);font-family:'DM Sans',sans-serif;" id="cart-count-label">(0 items)</span></div>
+              <button class="btn btn-ghost" onclick="clearCart()" style="font-size:13px;color:var(--text-muted);">Clear Cart</button>
+            </div>
+            <div class="cart-items" id="cart-items-list"></div>
+          </div>
+
+          <div class="cart-summary">
+            <div class="summary-title">Price Details</div>
+            <div class="summary-row"><span>Price (<span id="sum-items">0</span> items)</span><span id="sum-price">₹0</span></div>
+            <div class="summary-row savings"><span>Discount</span><span id="sum-discount">-₹0</span></div>
+            <div class="summary-row"><span>Delivery Charges</span><span id="sum-delivery" style="color:var(--success)">FREE</span></div>
+            <div class="summary-row"><span>Platform Fee</span><span>₹3</span></div>
+            <div class="summary-row total"><span>Total Amount</span><span id="sum-total">₹3</span></div>
+            <div style="font-size:13px;color:var(--success);font-weight:600;margin-top:8px;" id="sum-savings-msg"></div>
+            <div class="coupon-input">
+              <input type="text" placeholder="Enter coupon code" id="coupon-code" />
+              <button onclick="applyCoupon()">Apply</button>
+            </div>
+            <button class="btn-checkout" onclick="navigateTo('checkout')">
+              Proceed to Checkout →
+            </button>
+            <div class="trust-badges">
+              <div class="trust-badge">🔒 Safe and secure payments</div>
+              <div class="trust-badge">✅ Easy 30-day returns</div>
+              <div class="trust-badge">🚀 Guaranteed fast delivery</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WISHLIST PAGE -->
+    <div class="page" id="page-wishlist">
+      <div class="container wishlist-page">
+        <div class="wishlist-header">
+          <div class="section-title">❤️ My Wishlist</div>
+          <div class="section-subtitle" id="wish-count-label">0 items saved</div>
+        </div>
+        <div class="products-grid" id="wishlist-products"></div>
+        <div id="wishlist-empty" style="display:none;text-align:center;padding:80px 0;">
+          <div style="font-size:80px;margin-bottom:20px;">💔</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;">Your wishlist is empty</h3>
+          <p style="color:var(--text-muted);margin-bottom:24px;">Save items you love to your wishlist</p>
+          <button class="btn btn-primary" onclick="navigateTo('home')">Discover Products</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCOUNT PAGE -->
+    <div class="page" id="page-account">
+      <div class="container">
+        <div class="account-layout">
+          <div class="account-sidebar">
+            <div class="account-avatar">
+              <div class="avatar-img" id="avatar-initials">RS</div>
+              <div class="account-name" id="acc-name">Rahul Sharma</div>
+              <div class="account-email" id="acc-email">rahul@gmail.com</div>
+            </div>
+            <div class="account-menu-item active" onclick="switchAccountSection('profile', this)"><span class="icon">👤</span> My Profile</div>
+            <div class="account-menu-item" onclick="switchAccountSection('orders', this)"><span class="icon">📦</span> My Orders</div>
+            <div class="account-menu-item" onclick="switchAccountSection('address', this)"><span class="icon">📍</span> Addresses</div>
+            <div class="account-menu-item" onclick="switchAccountSection('wishlist-acc', this)"><span class="icon">❤️</span> Wishlist</div>
+            <div class="account-menu-item" onclick="switchAccountSection('wallet', this)"><span class="icon">💰</span> Wallet & Rewards</div>
+            <div class="account-menu-item" onclick="switchAccountSection('notifications', this)"><span class="icon">🔔</span> Notifications</div>
+            <div class="account-menu-item" onclick="switchAccountSection('security', this)"><span class="icon">🔒</span> Security</div>
+            <div class="account-menu-item" style="color:var(--danger);" onclick="doLogout()"><span class="icon">🚪</span> Logout</div>
+          </div>
+
+          <div class="account-content">
+
+            <!-- Profile Section -->
+            <div class="account-section active" id="acc-profile">
+              <div class="account-section-title">👤 My Profile</div>
+              <div class="form-row">
+                <div>
+                  <label class="acc-form-label">First Name</label>
+                  <input class="acc-form-input" type="text" value="Rahul" />
+                </div>
+                <div>
+                  <label class="acc-form-label">Last Name</label>
+                  <input class="acc-form-input" type="text" value="Sharma" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div>
+                  <label class="acc-form-label">Email Address</label>
+                  <input class="acc-form-input" type="email" value="rahul.sharma@gmail.com" />
+                </div>
+                <div>
+                  <label class="acc-form-label">Phone Number</label>
+                  <input class="acc-form-input" type="tel" value="+91 98765 43210" />
+                </div>
+              </div>
+              <div class="form-group-full">
+                <label class="acc-form-label">Date of Birth</label>
+                <input class="acc-form-input" type="date" value="1995-03-15" />
+              </div>
+              <div class="form-group-full">
+                <label class="acc-form-label">Gender</label>
+                <select class="acc-form-input">
+                  <option selected>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="showToast('Profile updated successfully! ✅','success')">Save Changes</button>
+            </div>
+
+            <!-- Orders Section -->
+            <div class="account-section" id="acc-orders">
+              <div class="account-section-title">📦 My Orders</div>
+              <div id="orders-list"></div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="account-section" id="acc-address">
+              <div class="account-section-title">📍 Saved Addresses</div>
+              <div class="address-card default">
+                <div class="address-default-tag">Default</div>
+                <div class="address-name">Rahul Sharma</div>
+                <div class="address-text">42, Sector 14, DLF Phase 1<br>Gurugram, Haryana - 122001<br>📱 +91 98765 43210</div>
+                <div class="address-actions">
+                  <button class="address-action-btn" onclick="showToast('Edit address','info')">✏️ Edit</button>
+                  <button class="address-action-btn">Set as Default</button>
+                </div>
+              </div>
+              <div class="address-card">
+                <div class="address-name">Priya Sharma (Office)</div>
+                <div class="address-text">Plot No. 5, Udyog Vihar, Phase 4<br>Gurugram, Haryana - 122015<br>📱 +91 98765 43211</div>
+                <div class="address-actions">
+                  <button class="address-action-btn" onclick="showToast('Edit address','info')">✏️ Edit</button>
+                  <button class="address-action-btn">Set as Default</button>
+                  <button class="address-action-btn" style="color:var(--danger)">🗑️ Delete</button>
+                </div>
+              </div>
+              <button class="btn btn-outline" style="margin-top:16px;" onclick="showToast('Add new address form','info')">+ Add New Address</button>
+            </div>
+
+            <!-- Wishlist in Account -->
+            <div class="account-section" id="acc-wishlist-acc">
+              <div class="account-section-title">❤️ Wishlist</div>
+              <div class="products-grid col-3" id="acc-wish-products"></div>
+            </div>
+
+            <!-- Wallet -->
+            <div class="account-section" id="acc-wallet">
+              <div class="account-section-title">💰 Wallet & Rewards</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+                <div style="background:linear-gradient(135deg,var(--primary),#ff8c5a);border-radius:16px;padding:24px;color:white;">
+                  <div style="font-size:12px;opacity:0.8;margin-bottom:8px;">Bazaar Wallet</div>
+                  <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;">₹1,250</div>
+                  <div style="font-size:12px;opacity:0.7;margin-top:4px;">Available balance</div>
+                </div>
+                <div style="background:linear-gradient(135deg,var(--secondary),#2a2a4e);border-radius:16px;padding:24px;color:white;">
+                  <div style="font-size:12px;opacity:0.8;margin-bottom:8px;">Reward Points</div>
+                  <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;">4,820</div>
+                  <div style="font-size:12px;opacity:0.7;margin-top:4px;">≈ ₹482 value</div>
+                </div>
+              </div>
+              <div style="border:2px solid var(--border);border-radius:var(--radius-md);padding:20px;">
+                <div style="font-weight:700;margin-bottom:16px;">Transaction History</div>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);">
+                    <div><div style="font-weight:600;font-size:14px;">Cashback — Order #BZR78234</div><div style="font-size:12px;color:var(--text-muted);">Today, 10:30 AM</div></div>
+                    <span style="color:var(--success);font-weight:700;">+₹200</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);">
+                    <div><div style="font-weight:600;font-size:14px;">Redeemed for Order #BZR77900</div><div style="font-size:12px;color:var(--text-muted);">Yesterday, 3:45 PM</div></div>
+                    <span style="color:var(--danger);font-weight:700;">-₹500</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;">
+                    <div><div style="font-weight:600;font-size:14px;">Signup Bonus</div><div style="font-size:12px;color:var(--text-muted);">15 Apr 2026</div></div>
+                    <span style="color:var(--success);font-weight:700;">+₹1,550</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications Prefs -->
+            <div class="account-section" id="acc-notifications">
+              <div class="account-section-title">🔔 Notification Settings</div>
+              <div style="display:flex;flex-direction:column;gap:0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--border);">
+                  <div><div style="font-weight:600;">Order Updates</div><div style="font-size:13px;color:var(--text-muted);">Get notified about your order status</div></div>
+                  <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--border);">
+                  <div><div style="font-weight:600;">Promotions & Offers</div><div style="font-size:13px;color:var(--text-muted);">Sales, coupons and exclusive deals</div></div>
+                  <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--border);">
+                  <div><div style="font-weight:600;">Price Drop Alerts</div><div style="font-size:13px;color:var(--text-muted);">When wishlist items go on sale</div></div>
+                  <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;">
+                  <div><div style="font-weight:600;">Newsletter</div><div style="font-size:13px;color:var(--text-muted);">Weekly newsletter with trending products</div></div>
+                  <label class="toggle"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="margin-top:16px;" onclick="showToast('Preferences saved! ✅','success')">Save Preferences</button>
+            </div>
+
+            <!-- Security -->
+            <div class="account-section" id="acc-security">
+              <div class="account-section-title">🔒 Security Settings</div>
+              <div class="form-group-full">
+                <label class="acc-form-label">Current Password</label>
+                <input class="acc-form-input" type="password" placeholder="Enter current password" />
+              </div>
+              <div class="form-group-full">
+                <label class="acc-form-label">New Password</label>
+                <input class="acc-form-input" type="password" placeholder="Enter new password" />
+              </div>
+              <div class="form-group-full">
+                <label class="acc-form-label">Confirm New Password</label>
+                <input class="acc-form-input" type="password" placeholder="Confirm new password" />
+              </div>
+              <button class="btn btn-primary" onclick="showToast('Password changed successfully! 🔒','success')">Update Password</button>
+              <div style="margin-top:32px;padding-top:32px;border-top:2px solid var(--border);">
+                <div style="font-weight:700;margin-bottom:16px;">Two-Factor Authentication</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--surface2);border-radius:var(--radius-sm);">
+                  <div><div style="font-weight:600;">Enable 2FA</div><div style="font-size:13px;color:var(--text-muted);">Add an extra layer of security to your account</div></div>
+                  <button class="btn btn-outline" onclick="showToast('2FA setup coming soon!','info')">Enable</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKOUT PAGE -->
+    <div class="page" id="page-checkout">
+      <div class="container">
+        <div class="checkout-layout">
+          <div>
+            <div class="checkout-steps">
+              <div class="checkout-step done">
+                <div class="step-num">✓</div>
+                <span>Cart</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="checkout-step active">
+                <div class="step-num">2</div>
+                <span>Address</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="checkout-step">
+                <div class="step-num">3</div>
+                <span>Payment</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="checkout-step">
+                <div class="step-num">4</div>
+                <span>Confirm</span>
+              </div>
+            </div>
+
+            <div class="checkout-section">
+              <div class="checkout-section-title">📍 Delivery Address</div>
+              <div class="address-card default" style="margin-bottom:12px;">
+                <div class="address-default-tag">Selected</div>
+                <div class="address-name">Rahul Sharma</div>
+                <div class="address-text">42, Sector 14, DLF Phase 1<br>Gurugram, Haryana - 122001<br>📱 +91 98765 43210</div>
+              </div>
+              <button class="btn btn-outline" onclick="showToast('Add new address','info')">+ Add New Address</button>
+            </div>
+
+            <div class="checkout-section">
+              <div class="checkout-section-title">💳 Payment Method</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <label style="display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--primary);border-radius:var(--radius-sm);cursor:pointer;background:var(--primary-light);">
+                  <input type="radio" name="payment" checked> <span>💳 Credit / Debit Card</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;">
+                  <input type="radio" name="payment"> <span>📱 UPI (GPay, PhonePe, Paytm)</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;">
+                  <input type="radio" name="payment"> <span>🏦 Net Banking</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;">
+                  <input type="radio" name="payment"> <span>💰 Bazaar Wallet (₹1,250 available)</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;">
+                  <input type="radio" name="payment"> <span>🤝 Cash on Delivery</span>
+                </label>
+              </div>
+              <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:20px;margin-top:16px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                  <div><label class="acc-form-label">Card Number</label><input class="acc-form-input" placeholder="1234 5678 9012 3456" /></div>
+                  <div><label class="acc-form-label">Cardholder Name</label><input class="acc-form-input" placeholder="Name on card" /></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div><label class="acc-form-label">Expiry Date</label><input class="acc-form-input" placeholder="MM/YY" /></div>
+                  <div><label class="acc-form-label">CVV</label><input class="acc-form-input" placeholder="***" type="password" /></div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-checkout" onclick="placeOrder()">
+              🔒 Place Order Securely
+            </button>
+          </div>
+
+          <div class="order-summary-sidebar">
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:16px;">Order Summary</div>
+            <div id="checkout-items" style="margin-bottom:16px;max-height:280px;overflow-y:auto;"></div>
+            <div style="border-top:2px solid var(--border);padding-top:16px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:var(--success);"><span>Discount</span><span id="co-discount">-₹0</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Delivery</span><span style="color:var(--success)">FREE</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:800;border-top:1px solid var(--border);padding-top:12px;margin-top:8px;"><span>Total</span><span id="co-total">₹0</span></div>
+            </div>
+            <div style="background:var(--primary-light);border-radius:var(--radius-sm);padding:12px;margin-top:16px;font-size:13px;color:var(--primary);font-weight:600;">
+              🎉 You're saving <span id="co-savings">₹0</span> on this order!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">Bazaar.</div>
+            <div class="footer-desc">India's favorite shopping destination. Discover millions of products across every category at the best prices with fast, reliable delivery.</div>
+            <div class="footer-social">
+              <div class="social-icon" onclick="showToast('Follow us on Facebook! 📘','info')">📘</div>
+              <div class="social-icon" onclick="showToast('Follow us on Instagram! 📸','info')">📸</div>
+              <div class="social-icon" onclick="showToast('Follow us on Twitter! 🐦','info')">🐦</div>
+              <div class="social-icon" onclick="showToast('Subscribe on YouTube! ▶️','info')">▶️</div>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#" onclick="navigateTo('home')">Home</a></li>
+              <li><a href="#" onclick="navigateTo('categories')">All Categories</a></li>
+              <li><a href="#" onclick="navigateTo('search')">Today's Deals</a></li>
+              <li><a href="#" onclick="navigateTo('cart')">My Cart</a></li>
+              <li><a href="#" onclick="navigateTo('account')">My Account</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Customer Service</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Track Your Order</a></li>
+              <li><a href="#">Returns & Refunds</a></li>
+              <li><a href="#">Shipping Info</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Policies</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Seller Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Download App</h4>
+            <ul>
+              <li><a href="#" onclick="showToast('App Store link! 🍎','info')">📱 App Store</a></li>
+              <li><a href="#" onclick="showToast('Play Store link! 🤖','info')">🤖 Google Play</a></li>
+            </ul>
+            <h4 style="margin-top:20px;">We Accept</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+              <div class="payment-icon">VISA</div>
+              <div class="payment-icon">MASTER</div>
+              <div class="payment-icon">UPI</div>
+              <div class="payment-icon">PAYTM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 Bazaar. All rights reserved. Made with ❤️ in India</p>
+      <div class="footer-payments">
+        <div class="payment-icon">VISA</div>
+        <div class="payment-icon">MASTER</div>
+        <div class="payment-icon">UPI</div>
+        <div class="payment-icon">NET</div>
+        <div class="payment-icon">COD</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-inner">
+      <button class="mobile-nav-item active" id="mn-home" onclick="navigateTo('home')">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </button>
+      <button class="mobile-nav-item" id="mn-categories" onclick="navigateTo('categories')">
+        <span class="icon">📦</span><span class="label">Shop</span>
+      </button>
+      <button class="mobile-nav-item" id="mn-cart" onclick="navigateTo('cart')" style="position:relative;">
+        <span class="icon">🛒</span><span class="label">Cart</span>
+        <span class="badge" id="mn-cart-badge" style="display:none">0</span>
+      </button>
+      <button class="mobile-nav-item" id="mn-wishlist" onclick="navigateTo('wishlist')">
+        <span class="icon">❤️</span><span class="label">Wishlist</span>
+      </button>
+      <button class="mobile-nav-item" id="mn-account" onclick="navigateTo('account')">
+        <span class="icon">👤</span><span class="label">Account</span>
+      </button>
+    </div>
+  </nav>
+
+</div>
+
+<!-- Toggle switch style -->
+<style>
+.toggle { position:relative;display:inline-block;width:48px;height:26px; }
+.toggle input { opacity:0;width:0;height:0; }
+.slider { position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:26px;transition:.3s; }
+.slider:before { position:absolute;content:"";height:20px;width:20px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s; }
+input:checked + .slider { background:var(--primary); }
+input:checked + .slider:before { transform:translateX(22px); }
+</style>
+
+<script src="app.js"></script>
+</body>
+</html>
