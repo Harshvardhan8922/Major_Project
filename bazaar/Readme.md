@@ -50,7 +50,7 @@ Bazaar/
 │── README.md
 ⚙️ Installation & Setup
 Clone the repository
-git clone https://github.com/your-username/bazaar.git
+git clone https://github.com/harshvardhan8922/bazaar.git
 Navigate to project folder
 cd bazaar
 Install dependencies
