@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learnify – Master Any Skill</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+        <span class="logo-text">Learnify</span>
+      </a>
+
+      <div class="nav-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search for anything…" id="navSearchInput" />
+        <button class="search-btn">Search</button>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#instructors">Instructors</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Sign Up Free</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search courses…" />
+      </div>
+      <ul>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#instructors">Instructors</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <div class="mobile-actions">
+        <a href="#" class="btn btn-ghost">Log In</a>
+        <a href="#" class="btn btn-primary">Sign Up Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-fire"></i> #1 Learning Platform 2025
+        </div>
+        <h1 class="hero-title">
+          Level Up Your <br />
+          <span class="hero-highlight">Skills. Career.</span><br />
+          Life.
+        </h1>
+        <p class="hero-sub">
+          Join 14 million+ learners. Access 200,000+ expert-led courses in tech, design, business, music, and more — learn at your own pace, on any device.
+        </p>
+        <div class="hero-cta">
+          <a href="#courses" class="btn btn-primary btn-lg">Explore Courses</a>
+          <a href="#" class="btn btn-outline btn-lg">
+            <i class="fa-solid fa-play"></i> Watch Demo
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>200K+</strong>
+            <span>Courses</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <strong>14M+</strong>
+            <span>Students</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <strong>75K+</strong>
+            <span>Instructors</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card main-card">
+          <div class="card-course-img">
+            <i class="fa-brands fa-python"></i>
+          </div>
+          <div class="card-course-info">
+            <span class="course-tag">Best Seller</span>
+            <h4>Complete Python Bootcamp</h4>
+            <div class="course-meta">
+              <span class="stars">★★★★★</span>
+              <span>4.9 (23,410)</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar" style="width:68%"></div>
+            </div>
+            <span class="progress-label">68% complete</span>
+          </div>
+        </div>
+        <div class="floating-card fc-1">
+          <i class="fa-solid fa-certificate"></i>
+          <span>Certificate Earned!</span>
+        </div>
+        <div class="floating-card fc-2">
+          <i class="fa-solid fa-users"></i>
+          <span>2,400 enrolled today</span>
+        </div>
+        <div class="floating-card fc-3">
+          <i class="fa-solid fa-star"></i>
+          <span>Top Rated</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TRUSTED BY ====== -->
+  <section class="trusted">
+    <div class="container">
+      <p class="trusted-label">Trusted by teams at</p>
+      <div class="trusted-logos">
+        <span><i class="fa-brands fa-google"></i> Google</span>
+        <span><i class="fa-brands fa-microsoft"></i> Microsoft</span>
+        <span><i class="fa-brands fa-amazon"></i> Amazon</span>
+        <span><i class="fa-brands fa-apple"></i> Apple</span>
+        <span><i class="fa-brands fa-meta"></i> Meta</span>
+        <span><i class="fa-brands fa-netflix"></i> Netflix</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CATEGORIES ====== -->
+  <section class="categories section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Explore</span>
+        <h2 class="section-title">Learn Anything You Want</h2>
+        <p class="section-sub">Dive into 14 top categories curated by industry experts</p>
+      </div>
+      <div class="categories-grid" id="categoriesGrid">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FEATURED COURSES ====== -->
+  <section class="courses section" id="courses">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Trending</span>
+        <h2 class="section-title">Featured Courses</h2>
+        <p class="section-sub">Hand-picked by our expert team just for you</p>
+      </div>
+
+      <div class="courses-filter" id="coursesFilter">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="development">Development</button>
+        <button class="filter-btn" data-cat="design">Design</button>
+        <button class="filter-btn" data-cat="business">Business</button>
+        <button class="filter-btn" data-cat="marketing">Marketing</button>
+        <button class="filter-btn" data-cat="data">Data Science</button>
+      </div>
+
+      <div class="courses-grid" id="coursesGrid">
+        <!-- JS rendered -->
+      </div>
+
+      <div class="courses-more">
+        <a href="#" class="btn btn-outline">View All Courses <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== WHY LEARNIFY ====== -->
+  <section class="why section">
+    <div class="container why-container">
+      <div class="why-visual">
+        <div class="why-img-wrap">
+          <div class="why-img-block">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="why-badge-1"><i class="fa-solid fa-trophy"></i> 98% Satisfaction</div>
+          <div class="why-badge-2"><i class="fa-solid fa-clock"></i> Lifetime Access</div>
+        </div>
+      </div>
+      <div class="why-content">
+        <span class="section-tag">Why Us</span>
+        <h2 class="section-title">Learning Reimagined <br/>for the Modern World</h2>
+        <div class="why-features">
+          <div class="why-feature">
+            <div class="why-icon"><i class="fa-solid fa-infinity"></i></div>
+            <div>
+              <h4>Lifetime Access</h4>
+              <p>Buy once, access forever. Study at your own pace with no expiry.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <div>
+              <h4>Learn on Any Device</h4>
+              <p>Seamless experience across desktop, tablet, and mobile.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon"><i class="fa-solid fa-certificate"></i></div>
+            <div>
+              <h4>Industry Certificates</h4>
+              <p>Earn verifiable certificates recognized by top employers.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
+            <div>
+              <h4>Expert Q&A Support</h4>
+              <p>Ask questions and get answers from instructors within 24 hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== INSTRUCTORS ====== -->
+  <section class="instructors section" id="instructors">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Meet the Experts</span>
+        <h2 class="section-title">World-Class Instructors</h2>
+        <p class="section-sub">Learn from industry leaders with real-world experience</p>
+      </div>
+      <div class="instructors-grid" id="instructorsGrid">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TESTIMONIALS ====== -->
+  <section class="testimonials section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Students Love Us</span>
+        <h2 class="section-title">Real Stories, Real Results</h2>
+      </div>
+      <div class="testimonials-slider" id="testimonialsSlider">
+        <!-- JS rendered -->
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </section>
+
+  <!-- ====== PRICING ====== -->
+  <section class="pricing section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Plans</span>
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-sub">Start free. Upgrade when you're ready.</p>
+      </div>
+      <div class="pricing-toggle">
+        <span>Monthly</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="billingToggle" />
+          <span class="toggle-slider"></span>
+        </label>
+        <span>Annual <em class="save-badge">Save 40%</em></span>
+      </div>
+      <div class="pricing-grid" id="pricingGrid">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA BANNER ====== -->
+  <section class="cta-banner">
+    <div class="cta-shapes">
+      <div class="cta-shape s1"></div>
+      <div class="cta-shape s2"></div>
+    </div>
+    <div class="container cta-content">
+      <h2>Start Learning Today — For Free</h2>
+      <p>Join 14 million learners. No credit card required.</p>
+      <div class="cta-form">
+        <input type="email" placeholder="Enter your email address" />
+        <button class="btn btn-primary btn-lg">Get Started Free</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+          <span class="logo-text">Learnify</span>
+        </a>
+        <p>Empowering learners worldwide with expert-led courses in every field.</p>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Learners</h5>
+        <ul>
+          <li><a href="#">All Courses</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#">Learning Paths</a></li>
+          <li><a href="#">Certificates</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Teach</h5>
+        <ul>
+          <li><a href="#">Become an Instructor</a></li>
+          <li><a href="#">Instructor Handbook</a></li>
+          <li><a href="#">Revenue Share</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2025 Learnify, Inc. All rights reserved.</p>
+        <div class="footer-app-badges">
+          <a href="#"><i class="fa-brands fa-apple"></i> App Store</a>
+          <a href="#"><i class="fa-brands fa-google-play"></i> Google Play</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
