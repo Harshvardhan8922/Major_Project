@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIMERS – Learn Without Limits</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     PAGE: LOGIN
+══════════════════════════════════════════ -->
+<div id="page-login" class="page active">
+  <div class="login-split">
+    <!-- Left panel -->
+    <div class="login-left">
+      <div class="login-brand">
+        <span class="brand-logo">AI</span>
+        <span class="brand-name">MERS</span>
+      </div>
+      <h1 class="login-tagline">Unlock Your<br/><em>Full Potential</em></h1>
+      <p class="login-sub">Join 5M+ learners mastering skills that matter.</p>
+      <div class="login-stats">
+        <div class="stat"><strong>80K+</strong><span>Courses</span></div>
+        <div class="stat"><strong>500+</strong><span>Instructors</span></div>
+        <div class="stat"><strong>150+</strong><span>Countries</span></div>
+      </div>
+      <div class="login-decor">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+      </div>
+    </div>
+    <!-- Right panel -->
+    <div class="login-right">
+      <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p class="login-card-sub">Sign in to continue learning</p>
+        <div id="login-error" class="login-error hidden">Invalid credentials. Try admin / admin123</div>
+        <div class="form-group">
+          <label>Email or Username</label>
+          <div class="input-wrap">
+            <i class="fa fa-user"></i>
+            <input type="text" id="login-user" placeholder="admin" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <i class="fa fa-lock"></i>
+            <input type="password" id="login-pass" placeholder="••••••••" />
+            <i class="fa fa-eye toggle-pass" onclick="togglePass()"></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="checkbox-label"><input type="checkbox" /> Remember me</label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+        <button class="btn-login" onclick="doLogin()">Sign In <i class="fa fa-arrow-right"></i></button>
+        <div class="login-divider"><span>or continue with</span></div>
+        <div class="social-row">
+          <button class="btn-social"><i class="fab fa-google"></i> Google</button>
+          <button class="btn-social"><i class="fab fa-github"></i> GitHub</button>
+        </div>
+        <p class="login-signup">Don't have an account? <a href="#">Sign Up Free</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════ -->
+<div id="page-home" class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="nav-brand" onclick="goHome()">
+        <span class="brand-logo-sm">AI</span><span class="brand-name-sm">MERS</span>
+      </div>
+      <div class="nav-search-wrap">
+        <i class="fa fa-search"></i>
+        <input type="text" id="global-search" placeholder="Search for courses, topics, instructors…" onkeyup="filterSearch(this.value)" />
+        <div id="search-dropdown" class="search-dropdown hidden"></div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="nav-tab active" data-tab="home" onclick="switchTab('home')"><i class="fa fa-home"></i> Home</button>
+      <button class="nav-tab" data-tab="courses" onclick="switchTab('courses')"><i class="fa fa-graduation-cap"></i> Courses</button>
+      <button class="nav-tab" data-tab="mylearning" onclick="switchTab('mylearning')"><i class="fa fa-book-open"></i> My Learning</button>
+      <button class="nav-tab" data-tab="jobs" onclick="switchTab('jobs')"><i class="fa fa-briefcase"></i> Jobs</button>
+      <button class="nav-tab" data-tab="account" onclick="switchTab('account')"><i class="fa fa-user-circle"></i> Account</button>
+      <button class="btn-logout" onclick="logout()"><i class="fa fa-sign-out-alt"></i></button>
+    </div>
+    <!-- Hamburger -->
+    <button class="hamburger" onclick="toggleMobileMenu()"><i class="fa fa-bars"></i></button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu hidden">
+    <button onclick="switchTab('home');toggleMobileMenu()"><i class="fa fa-home"></i> Home</button>
+    <button onclick="switchTab('courses');toggleMobileMenu()"><i class="fa fa-graduation-cap"></i> Courses</button>
+    <button onclick="switchTab('mylearning');toggleMobileMenu()"><i class="fa fa-book-open"></i> My Learning</button>
+    <button onclick="switchTab('jobs');toggleMobileMenu()"><i class="fa fa-briefcase"></i> Jobs</button>
+    <button onclick="switchTab('account');toggleMobileMenu()"><i class="fa fa-user-circle"></i> Account</button>
+    <button onclick="logout()"><i class="fa fa-sign-out-alt"></i> Logout</button>
+  </div>
+
+  <!-- ─── TAB: HOME ─── -->
+  <div id="tab-home" class="tab-content active">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-badge"><i class="fa fa-bolt"></i> AI-Powered Learning Platform</div>
+        <h1>Learn Skills That<br/><em>Shape Tomorrow</em></h1>
+        <p>Expert-led courses in tech, business, design, and more. Start free, grow fast.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="switchTab('courses')">Explore Courses <i class="fa fa-arrow-right"></i></button>
+          <button class="btn-outline" onclick="switchTab('mylearning')">My Dashboard</button>
+        </div>
+        <div class="hero-trust">
+          <div class="avatars">
+            <img src="https://i.pravatar.cc/32?img=1" /><img src="https://i.pravatar.cc/32?img=2" /><img src="https://i.pravatar.cc/32?img=3" /><img src="https://i.pravatar.cc/32?img=4" />
+          </div>
+          <span><strong>5M+</strong> students worldwide</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-float card-f1">
+          <i class="fab fa-python"></i>
+          <div><strong>Python for AI</strong><span>4.9 ★ · 48K students</span></div>
+        </div>
+        <div class="hero-card-float card-f2">
+          <i class="fa fa-chart-line"></i>
+          <div><strong>Data Science Pro</strong><span>4.8 ★ · 32K students</span></div>
+        </div>
+        <div class="hero-img-ring">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=420&q=80" alt="Learning" />
+        </div>
+        <div class="hero-card-float card-f3">
+          <i class="fa fa-trophy"></i>
+          <div><strong>Certificate Ready</strong><span>100+ programs</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section-wrap">
+      <div class="section-head"><h2>Browse Categories</h2><a onclick="switchTab('courses')" class="see-all">See all <i class="fa fa-chevron-right"></i></a></div>
+      <div class="categories-grid">
+        <div class="cat-card" onclick="filterCategory('Web Development')"><i class="fa fa-code"></i><span>Web Dev</span></div>
+        <div class="cat-card" onclick="filterCategory('Data Science')"><i class="fa fa-chart-bar"></i><span>Data Science</span></div>
+        <div class="cat-card" onclick="filterCategory('AI & ML')"><i class="fa fa-robot"></i><span>AI & ML</span></div>
+        <div class="cat-card" onclick="filterCategory('Design')"><i class="fa fa-palette"></i><span>Design</span></div>
+        <div class="cat-card" onclick="filterCategory('Business')"><i class="fa fa-briefcase"></i><span>Business</span></div>
+        <div class="cat-card" onclick="filterCategory('Cybersecurity')"><i class="fa fa-shield-alt"></i><span>Security</span></div>
+        <div class="cat-card" onclick="filterCategory('Photography')"><i class="fa fa-camera"></i><span>Photography</span></div>
+        <div class="cat-card" onclick="filterCategory('Marketing')"><i class="fa fa-bullhorn"></i><span>Marketing</span></div>
+      </div>
+    </section>
+
+    <!-- FEATURED COURSES -->
+    <section class="section-wrap">
+      <div class="section-head"><h2>Featured Courses</h2><a onclick="switchTab('courses')" class="see-all">See all <i class="fa fa-chevron-right"></i></a></div>
+      <div class="courses-row" id="featured-courses"></div>
+    </section>
+
+    <!-- BANNER -->
+    <section class="promo-banner">
+      <div class="promo-text">
+        <h2>Upgrade to <span>AIMERS Pro</span></h2>
+        <p>Access 80,000+ courses, certificates, and AI-powered learning paths — all for one price.</p>
+        <button class="btn-primary">Get Pro for ₹499/mo</button>
+      </div>
+      <div class="promo-img"><i class="fa fa-crown"></i></div>
+    </section>
+
+    <!-- TOP INSTRUCTORS -->
+    <section class="section-wrap">
+      <div class="section-head"><h2>Top Instructors</h2></div>
+      <div class="instructors-row" id="instructors-row"></div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-wrap">
+      <div class="section-head"><h2>What Learners Say</h2></div>
+      <div class="testimonials-row">
+        <div class="testimonial-card"><p>"AIMERS completely changed my career trajectory. I landed a data scientist role at a top MNC within 3 months of completing the course."</p><div class="test-author"><img src="https://i.pravatar.cc/40?img=10" /><div><strong>Priya Sharma</strong><span>Data Scientist, Bangalore</span></div></div></div>
+        <div class="testimonial-card"><p>"The AI-driven recommendations are spot on. I always know what to study next. Best learning platform I've ever used."</p><div class="test-author"><img src="https://i.pravatar.cc/40?img=20" /><div><strong>Rahul Verma</strong><span>Full Stack Developer, Delhi</span></div></div></div>
+        <div class="testimonial-card"><p>"Incredible value for money. The instructors are industry experts, not just academics. My portfolio grew 10x after AIMERS."</p><div class="test-author"><img src="https://i.pravatar.cc/40?img=30" /><div><strong>Aisha Khan</strong><span>UX Designer, Mumbai</span></div></div></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-brand"><span class="brand-logo-sm">AI</span><span class="brand-name-sm">MERS</span></div>
+      <div class="footer-links">
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Help</a><a href="#">Privacy</a><a href="#">Terms</a>
+      </div>
+      <p class="footer-copy">© 2025 AIMERS Education Pvt. Ltd. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- ─── TAB: COURSES ─── -->
+  <div id="tab-courses" class="tab-content">
+    <div class="page-inner">
+      <div class="page-header">
+        <h1>All Courses</h1>
+        <p>Explore our library of 80,000+ expert-led courses</p>
+      </div>
+      <!-- Filters -->
+      <div class="courses-filters">
+        <div class="filter-search">
+          <i class="fa fa-search"></i>
+          <input type="text" id="courses-search" placeholder="Search courses…" onkeyup="renderCourses()" />
+        </div>
+        <div class="filter-pills" id="cat-pills"></div>
+        <select id="courses-sort" onchange="renderCourses()" class="filter-select">
+          <option value="popular">Most Popular</option>
+          <option value="rating">Highest Rated</option>
+          <option value="newest">Newest</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+      <div class="courses-grid" id="all-courses-grid"></div>
+    </div>
+  </div>
+
+  <!-- ─── TAB: MY LEARNING ─── -->
+  <div id="tab-mylearning" class="tab-content">
+    <div class="page-inner">
+      <div class="page-header">
+        <h1>My Learning</h1>
+        <p>Track your progress and continue where you left off</p>
+      </div>
+      <div class="ml-stats">
+        <div class="ml-stat"><i class="fa fa-play-circle"></i><div><strong id="ml-enrolled">0</strong><span>Enrolled</span></div></div>
+        <div class="ml-stat"><i class="fa fa-check-circle"></i><div><strong id="ml-completed">2</strong><span>Completed</span></div></div>
+        <div class="ml-stat"><i class="fa fa-certificate"></i><div><strong id="ml-certs">1</strong><span>Certificates</span></div></div>
+        <div class="ml-stat"><i class="fa fa-clock"></i><div><strong>47h</strong><span>Hours Learned</span></div></div>
+      </div>
+      <h2 class="section-title">Continue Learning</h2>
+      <div class="enrolled-list" id="enrolled-list"></div>
+      <h2 class="section-title" style="margin-top:2rem">Recommended For You</h2>
+      <div class="courses-row" id="recommended-courses"></div>
+    </div>
+  </div>
+
+  <!-- ─── TAB: JOBS ─── -->
+  <div id="tab-jobs" class="tab-content">
+    <div class="page-inner">
+      <div class="page-header">
+        <h1>Job Board</h1>
+        <p>Opportunities matched to your AIMERS skills</p>
+      </div>
+      <div class="jobs-filters">
+        <div class="filter-search">
+          <i class="fa fa-search"></i>
+          <input type="text" id="jobs-search" placeholder="Search jobs, skills, companies…" onkeyup="renderJobs()" />
+        </div>
+        <select id="jobs-type" onchange="renderJobs()" class="filter-select">
+          <option value="all">All Types</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Remote">Remote</option>
+          <option value="Internship">Internship</option>
+          <option value="Freelance">Freelance</option>
+        </select>
+        <select id="jobs-exp" onchange="renderJobs()" class="filter-select">
+          <option value="all">All Experience</option>
+          <option value="Fresher">Fresher</option>
+          <option value="1-3 yrs">1-3 yrs</option>
+          <option value="3-5 yrs">3-5 yrs</option>
+          <option value="5+ yrs">5+ yrs</option>
+        </select>
+      </div>
+      <div class="jobs-list" id="jobs-list"></div>
+    </div>
+  </div>
+
+  <!-- ─── TAB: ACCOUNT ─── -->
+  <div id="tab-account" class="tab-content">
+    <div class="page-inner">
+      <div class="account-hero">
+        <div class="account-avatar-wrap">
+          <img src="https://i.pravatar.cc/120?img=5" class="account-avatar" id="acc-avatar" />
+          <button class="avatar-edit" onclick="document.getElementById('avatar-upload').click()"><i class="fa fa-camera"></i></button>
+          <input type="file" id="avatar-upload" accept="image/*" style="display:none" onchange="changeAvatar(event)" />
+        </div>
+        <div class="account-info">
+          <h1 id="acc-name">Alex Johnson</h1>
+          <p id="acc-email">alex@aimers.io</p>
+          <div class="acc-badges">
+            <span class="badge badge-pro"><i class="fa fa-crown"></i> Pro Member</span>
+            <span class="badge badge-streak"><i class="fa fa-fire"></i> 14-Day Streak</span>
+          </div>
+        </div>
+      </div>
+      <div class="account-tabs">
+        <button class="acc-tab active" onclick="switchAccTab('profile')">Profile</button>
+        <button class="acc-tab" onclick="switchAccTab('security')">Security</button>
+        <button class="acc-tab" onclick="switchAccTab('notifications')">Notifications</button>
+        <button class="acc-tab" onclick="switchAccTab('billing')">Billing</button>
+      </div>
+      <!-- Profile -->
+      <div id="acc-profile" class="acc-panel active">
+        <div class="profile-form">
+          <div class="form-row-2">
+            <div class="form-group"><label>First Name</label><input type="text" value="Alex" /></div>
+            <div class="form-group"><label>Last Name</label><input type="text" value="Johnson" /></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" value="alex@aimers.io" /></div>
+          <div class="form-group"><label>Phone</label><input type="tel" value="+91 9876543210" /></div>
+          <div class="form-group"><label>Headline</label><input type="text" value="Full Stack Developer & AI Enthusiast" /></div>
+          <div class="form-group"><label>Bio</label><textarea rows="4">Passionate about technology and continuous learning. Building the future one line of code at a time.</textarea></div>
+          <div class="form-group"><label>Website</label><input type="url" value="https://alexjohnson.dev" /></div>
+          <div class="form-group"><label>Location</label><input type="text" value="New Delhi, India" /></div>
+          <button class="btn-primary" onclick="saveProfile()">Save Changes <i class="fa fa-check"></i></button>
+        </div>
+      </div>
+      <!-- Security -->
+      <div id="acc-security" class="acc-panel">
+        <div class="profile-form">
+          <div class="form-group"><label>Current Password</label><input type="password" placeholder="••••••••" /></div>
+          <div class="form-group"><label>New Password</label><input type="password" placeholder="••••••••" /></div>
+          <div class="form-group"><label>Confirm New Password</label><input type="password" placeholder="••••••••" /></div>
+          <button class="btn-primary">Update Password</button>
+          <hr style="margin:2rem 0;border-color:var(--border)"/>
+          <h3 style="margin-bottom:1rem">Two-Factor Authentication</h3>
+          <div class="toggle-row"><span>Enable 2FA via Authenticator App</span><label class="toggle"><input type="checkbox" /><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>Login alerts via email</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+        </div>
+      </div>
+      <!-- Notifications -->
+      <div id="acc-notifications" class="acc-panel">
+        <div class="profile-form">
+          <h3 style="margin-bottom:1.5rem">Notification Preferences</h3>
+          <div class="toggle-row"><span>Course updates & announcements</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>New course recommendations</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>Job alerts matching your skills</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>Weekly learning digest</span><label class="toggle"><input type="checkbox" /><span class="slider"></span></label></div>
+          <div class="toggle-row"><span>Promotional emails</span><label class="toggle"><input type="checkbox" /><span class="slider"></span></label></div>
+          <button class="btn-primary" style="margin-top:2rem">Save Preferences</button>
+        </div>
+      </div>
+      <!-- Billing -->
+      <div id="acc-billing" class="acc-panel">
+        <div class="billing-plan">
+          <div class="plan-card active-plan">
+            <div class="plan-badge">Current Plan</div>
+            <h3>AIMERS Pro</h3>
+            <div class="plan-price">₹499<span>/month</span></div>
+            <ul>
+              <li><i class="fa fa-check"></i> Access to 80,000+ courses</li>
+              <li><i class="fa fa-check"></i> Official Certificates</li>
+              <li><i class="fa fa-check"></i> Offline Downloads</li>
+              <li><i class="fa fa-check"></i> AI Learning Assistant</li>
+              <li><i class="fa fa-check"></i> Priority Support</li>
+            </ul>
+            <button class="btn-outline">Cancel Plan</button>
+          </div>
+          <div class="plan-card">
+            <h3>AIMERS Teams</h3>
+            <div class="plan-price">₹999<span>/user/month</span></div>
+            <ul>
+              <li><i class="fa fa-check"></i> Everything in Pro</li>
+              <li><i class="fa fa-check"></i> Team Analytics</li>
+              <li><i class="fa fa-check"></i> Custom Learning Paths</li>
+              <li><i class="fa fa-check"></i> Dedicated Account Manager</li>
+            </ul>
+            <button class="btn-primary">Upgrade to Teams</button>
+          </div>
+        </div>
+        <div class="payment-history">
+          <h3>Payment History</h3>
+          <table class="billing-table">
+            <thead><tr><th>Date</th><th>Plan</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Apr 1, 2025</td><td>AIMERS Pro</td><td>₹499</td><td><span class="badge-success">Paid</span></td></tr>
+              <tr><td>Mar 1, 2025</td><td>AIMERS Pro</td><td>₹499</td><td><span class="badge-success">Paid</span></td></tr>
+              <tr><td>Feb 1, 2025</td><td>AIMERS Pro</td><td>₹499</td><td><span class="badge-success">Paid</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MODAL: COURSE DETAIL ─── -->
+  <div id="course-modal" class="modal-overlay hidden" onclick="closeCourseModal(event)">
+    <div class="modal-box" id="modal-content"></div>
+  </div>
+
+  <!-- ─── MODAL: JOB DETAIL ─── -->
+  <div id="job-modal" class="modal-overlay hidden" onclick="closeJobModal(event)">
+    <div class="modal-box" id="job-modal-content"></div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden"></div>
+
+</div><!-- end page-home -->
+
+<script src="script.js"></script>
+</body>
+</html>
