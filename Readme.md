@@ -1,6 +1,3 @@
-hshajajaj
-smnansjsjs
-msjsjsjsjsn
 #🚀 Major Project Repository
 
 Welcome to the Major Project repository! 🎯
