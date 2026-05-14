@@ -1,7 +1,3 @@
-hahagagah
-amanajajaj
-ananajjsja
-jajajajaj
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
