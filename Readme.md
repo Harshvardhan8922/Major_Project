@@ -1,6 +1,3 @@
-bvcfgvbhh
-jgfhjughj
-.hjnvhjnm
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
