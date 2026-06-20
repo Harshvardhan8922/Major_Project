@@ -1,7 +1,3 @@
-bababsjsjsj
-smskeiwiwiwk
-smskskkskwkw
-wkkaisosowokw
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
