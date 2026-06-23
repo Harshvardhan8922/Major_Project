@@ -1,8 +1,4 @@
-ajjahahaha
-amajajakka
-akajjajaka
-amakkaka
-a#🚀 Major Project Repository.
+#🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
 This repository is created to help college students, intermediate learners, and aspiring developers learn and build real-world projects using the MERN Stack.
