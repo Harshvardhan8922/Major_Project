@@ -1,7 +1,3 @@
-whabhahan
-amsjsjsnsj
-wmsnsjjajs
-smsnakamks
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
