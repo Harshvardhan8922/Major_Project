@@ -1,7 +1,3 @@
-wjajajjw
-amakwkwkw
-makwkwka
-akkakwkw
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
