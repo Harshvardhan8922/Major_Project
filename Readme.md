@@ -1,7 +1,3 @@
-nanananana
-amsmmskska
-makakakaka
-kakakakak
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
