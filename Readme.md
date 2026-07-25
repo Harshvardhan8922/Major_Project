@@ -1,7 +1,3 @@
-hahahaha
-amanjakw
-amnanaja
-janajajw
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
