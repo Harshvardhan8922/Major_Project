@@ -1,3 +1,7 @@
+ajhananana
+amammanaka
+amkakakakka
+amanmakakan
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
