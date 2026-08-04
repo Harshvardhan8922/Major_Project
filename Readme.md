@@ -1,3 +1,7 @@
+wjjwhahahw
+ammanakaka
+amammakajja
+amanjajakaka
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
