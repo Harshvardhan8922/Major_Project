@@ -1,7 +1,3 @@
-janananananamkaka
-amakakaka
-amammakaa
-mamakakaka
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
