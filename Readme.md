@@ -1,7 +1,3 @@
-hHabananna
-ammakaka
-amakkakakaa
-kakakskska
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
