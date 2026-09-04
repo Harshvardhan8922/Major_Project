@@ -1,9 +1,3 @@
-sbbababa
-a
-ammamaa
-ammanamsma
-amsnnanss
-smmsmsnssm
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
