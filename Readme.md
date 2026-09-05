@@ -1,7 +1,3 @@
-wijsjaja.amam
-smamsmmas
-smsmmamam
-smskksma
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
