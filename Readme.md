@@ -1,7 +1,3 @@
-Bhahahaha
-amanajajjamajajja
-amammans
-mananana
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
