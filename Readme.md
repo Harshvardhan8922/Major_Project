@@ -1,7 +1,3 @@
-annanaana
-amansnmaa
-annamsnss
-jakaksmakka
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
