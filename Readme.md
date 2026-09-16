@@ -1,3 +1,7 @@
+ajjakaka
+amamammaa
+amakmakam
+makakakam
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
