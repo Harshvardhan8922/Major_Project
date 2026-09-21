@@ -1,3 +1,7 @@
+jsjajaja
+amamakska
+msmakama
+smmamama
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
