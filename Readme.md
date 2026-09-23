@@ -1,7 +1,3 @@
-jwnajaja
-mamakaka
-smmamaks
-smmsksksm
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
