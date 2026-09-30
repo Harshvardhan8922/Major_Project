@@ -1,7 +1,3 @@
-hanahajana
-smanskka
-smmamam
-smmamama
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
