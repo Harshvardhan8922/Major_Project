@@ -1,9 +1,3 @@
-jananan
-a.mamamma
-s.amamma
-s
-amamma
-amM
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
