@@ -1,6 +1,3 @@
-wjjsjajs
-amsmskkaks
-smsnsmsms.msmsmsmsmsm.smsmsnsnsm.
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
