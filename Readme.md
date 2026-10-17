@@ -1,7 +1,3 @@
-bsbanana
-amamamam
-amammama
-ammamama
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
