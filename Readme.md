@@ -1,7 +1,3 @@
-skkaka
-ammama
-aammamama
-amamsmmas
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
