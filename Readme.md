@@ -1,8 +1,3 @@
-wkmMMa
-a
-ammamama
-amamamam
-amamamama
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
