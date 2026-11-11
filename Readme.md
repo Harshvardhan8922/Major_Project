@@ -1,8 +1,3 @@
-snnananana
-
-amamamamamam
-amamamamam
-amamammama
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
