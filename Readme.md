@@ -1,3 +1,7 @@
+jananana
+amamamsmsm
+.amamamam
+.MMsmmamz
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
