@@ -1,7 +1,3 @@
-bbabajsja
-smsnsjsns
-mamamamama
-manananana
 #🚀 Major Project Repository.
 
 Welcome to the Major Project repository! 🎯
